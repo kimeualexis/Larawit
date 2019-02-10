@@ -96,7 +96,7 @@
                         <div class="modal-body">
                             <form class="form-horizontal" action="{{ url('/add-comment') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
+                            <input type="hidden" name="quiz_id" value="{{ $quiz->id }}"> {{ $quiz->id }}
                                 <div class="form-group">
                                     <textarea rows="7" class="form-control" name="comment" required ></textarea>
                                 </div>

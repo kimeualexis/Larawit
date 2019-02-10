@@ -4,7 +4,7 @@
 <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
 
 @section('content')
-    <div class="col-sm-9">
+    <div class="col-sm-12">
     @foreach($questions as $question)
     <article class="media content-section">
             @csrf
@@ -18,7 +18,6 @@
                     <input type="hidden" name="user_id" value="{{ $question->user_id }}">
                 <a class="mr-2" href=""><button type="submit" class="buttontext">{{ $question->name }}</button></a>
                     </form>
-
                 <small class="text-muted">Created: {{ $question->created_at }}</small>
             </div>
             <form method="post" action="{{url('/view-question')}}">

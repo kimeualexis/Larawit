@@ -70,6 +70,7 @@ class UsersController extends Controller
         $questions = DB::table('users')
             ->join('questions', 'users.id', '=', 'questions.user_id')
             ->select('users.*', 'questions.*')->orderBy('questions.created_at', 'desc')
+            ->where('questions.user_id', '=', $id)
             ->paginate(5);
         return view('users.index', ['users'=> $users, 'questions'=> $questions]);
     }

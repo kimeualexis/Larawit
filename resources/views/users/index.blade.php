@@ -100,15 +100,15 @@
     <!-- code end -->
 
         <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <br>
-            <i class="fa fa-user">&nbsp;{{ $user->name }}</i>
-            <i class="fa fa-book">&nbsp;{{ $user->status }}</i>
-            <a href="{{ $user->website }}"> <i class="fa fa-link">&nbsp;{{ $user->website }}</i></a>
+            <i class="fa fa-user">&nbsp;{{ $user->name }}</i><br>
+            <i class="fa fa-book">&nbsp;{{ $user->status }}</i><br>
+            <a href="{{ $user->website }}"> <i class="fa fa-link">&nbsp;{{ $user->website }}</i></a><br>
 
             @if(Auth::id()==$user->id)
-                <a href="" data-toggle="modal" data-target="#profileModal"><i class="fa fa-pencil">&nbsp;Update profile</i></a>
-                <a href="{{ url('/view-messages') }}"><i class="fa fa-envelope">&nbsp; Messages</i></a> </p>
+                <a href="" data-toggle="modal" data-target="#profileModal"><i class="fa fa-pencil">&nbsp;Update profile</i></a><br>
+                <a href="{{ url('/view-messages') }}"><i class="fa fa-envelope">&nbsp; Messages</i></a>
 
 
                 <!-- Modal -->
@@ -165,7 +165,7 @@
             @endif
         </div>
 
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <br>
             @foreach($questions as $question)
                 <article class="media content-section">

@@ -32,11 +32,16 @@ class CommentsController extends Controller
 
         //return redirect('/view-question')
 
+        /*
         $questions = DB::table('questions')
             ->join('users', 'users.id', '=', 'questions.user_id')
             ->where('questions.id', '=', $quiz)->get();
         $comments = DB::select("SELECT * FROM comments WHERE question_id=$quiz");
+
         return view('questions.show', ['questions'=> $questions], ['comments'=> $comments]);
+        */
+
+        return $quiz;
 
     }
 
