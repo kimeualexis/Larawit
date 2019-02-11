@@ -10,9 +10,9 @@
                     <a class="mr-2" href="">{{ $quiz->name }}</a>
                     <small class="text-muted">{{ $quiz->created_at }}</small>
                     <div class="">
-                        @if(Auth::id()==($quiz->user_id))
+                        @if(Auth::user()->id==($quiz->uid))
                         <a class="btn btn-secondary btn-sn mt-1 mb-1" href="" data-toggle="modal" data-target="#quizUpdate">Update</a>
-                        <a class="btn btn-danger btn-sn mt-1 mb-1" href='delete-question/{{ $quiz->id }}'>Delete</a>
+                        <a class="btn btn-danger btn-sn mt-1 mb-1" href='delete-question/{{ $quiz->qid }}'>Delete</a>
 
                             <!-- Modal -->
                             <div id="quizUpdate" class="modal fade" role="dialog">
@@ -28,7 +28,7 @@
                                             <form class="form-horizontal" action="{{ url('/update-question') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
 
-                                                <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">
+                                                <input type="hidden" name="quiz_id" value="{{ $quiz->qid }}">
                                                 <div class="form-group">
                                                     <label class="">Title:</label>
                                                     <input type="text" class="form-control col-md-6" name="title" value="{{ $quiz->title }}" required />
@@ -96,7 +96,7 @@
                         <div class="modal-body">
                             <form class="form-horizontal" action="{{ url('/add-comment') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="quiz_id" value="{{ $quiz->id }}"> {{ $quiz->id }}
+                            <input type="hidden" name="quiz_id" value="{{ $quiz->qid }}">
                                 <div class="form-group">
                                     <textarea rows="7" class="form-control" name="comment" required ></textarea>
                                 </div>

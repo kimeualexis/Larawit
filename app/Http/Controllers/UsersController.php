@@ -24,7 +24,7 @@ class UsersController extends Controller
         */
 
         $user_id = $request->input('user_id');
-        $users = DB::select("SELECT * FROM users WHERE id=$user_id");
+        $users = DB::select("SELECT * FROM users WHERE id=$user_id ");
 
         $questions = DB::table('users')
             ->join('questions', 'users.id', '=', 'questions.user_id')
@@ -67,12 +67,9 @@ class UsersController extends Controller
 
         $users = DB::select("SELECT * FROM users WHERE id=$id");
 
-        $questions = DB::table('users')
-            ->join('questions', 'users.id', '=', 'questions.user_id')
-            ->select('users.*', 'questions.*')->orderBy('questions.created_at', 'desc')
-            ->where('questions.user_id', '=', $id)
-            ->paginate(5);
+        $questions = DB::select("SELECT * FROM questions WHERE user_id=$id");
         return view('users.index', ['users'=> $users, 'questions'=> $questions]);
+
     }
 
     /**

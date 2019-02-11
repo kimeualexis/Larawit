@@ -8,21 +8,17 @@
     @foreach($questions as $question)
     <article class="media content-section">
             @csrf
-        <a class="mr-2" href="{{ route('user-profile', $question->user_id) }}"><img class="rounded-circle article-img" src="{{ $question->profpic }}"></a>
+        <a class="mr-2" href="{{ route('user-profile', $question->uid) }}"><img class="rounded-circle article-img" src="{{ $question->profpic }}"></a>
 
             <div class="media-body">
             <div class="article-metadata">
 
-                <form method="post" action="{{url('/user-profile')}}">
-                    @csrf
-                    <input type="hidden" name="user_id" value="{{ $question->user_id }}">
-                <a class="mr-2" href=""><button type="submit" class="buttontext">{{ $question->name }}</button></a>
-                    </form>
+                <a class="mr-2" href="{{ route('user-profile', $question->uid) }}"><button type="submit" class="buttontext">{{ $question->name }}</button></a>
                 <small class="text-muted">Created: {{ $question->created_at }}</small>
             </div>
             <form method="post" action="{{url('/view-question')}}">
                 @csrf
-                <input type="hidden" name="quiz_id" value="{{ $question->id }}">
+                <input type="hidden" name="quiz_id" value="{{ $question->qid }}">
                 <h2><a class="article-title" href=""><button type="submit" class="buttontext">{{ $question->title }}</button></a></h2>
             </form>
             <p class="article-content">{{ $question->question }}</p>

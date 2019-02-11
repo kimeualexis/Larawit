@@ -7,7 +7,7 @@
     <div class="row1">
 
         <!-- code start -->
-                @foreach($users as $user)
+                @foreach($users as $u)
 
             <div class="twPc-div">
             <img class="twPc-bg twPc-block" src="">
@@ -15,8 +15,8 @@
             <div>
 
                     <a title="Mert S. Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
-                        @if(!empty($user->profpic))
-                            <img alt="Mert S. Kaplan" src="{{ $user->profpic }}" class="twPc-avatarImg">
+                        @if(!empty($u->profpic))
+                            <img alt="Mert S. Kaplan" src="{{ $u->profpic }}" class="twPc-avatarImg">
                         @else
                             <img alt="Mert S. Kaplan" src="http://127.0.0.1:8000/uploads/default.jpg" class="twPc-avatarImg">
                         @endif
@@ -25,10 +25,10 @@
 
                     <div class="twPc-divUser">
                         <div class="twPc-divName">
-                            <a href="https://twitter.com/mertskaplan">{{ $user->name }}</a>
+                            <a href="https://twitter.com/mertskaplan">{{ $u->name }}</a>
                         </div>
                         <span>
-				<a href="https://twitter.com/mertskaplan"><span>{{ $user->email }}</span></a>
+				<a href="https://twitter.com/mertskaplan"><span>{{ $u->email }}</span></a>
 			</span>
                     </div>
 
@@ -47,7 +47,7 @@
 
                                     <form class="form-horizontal" action="{{ url('/send-message') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" name="recepient_id" value="{{ $user->id }}">
+                                        <input type="hidden" name="recepient_id" value="{{ $u->id }}">
                                         <div class="form-group">
                                             <textarea rows="7" class="form-control" name="message" required ></textarea>
                                         </div>
@@ -102,11 +102,11 @@
         <div class="row">
         <div class="col-sm-3">
             <br>
-            <i class="fa fa-user">&nbsp;{{ $user->name }}</i><br>
-            <i class="fa fa-book">&nbsp;{{ $user->status }}</i><br>
-            <a href="{{ $user->website }}"> <i class="fa fa-link">&nbsp;{{ $user->website }}</i></a><br>
+            <i class="fa fa-user">&nbsp;{{ $u->name }}</i><br>
+            <i class="fa fa-book">&nbsp;{{ $u->status }}</i><br>
+            <a href="{{ $u->website }}"> <i class="fa fa-link">&nbsp;{{ $u->website }}</i></a><br>
 
-            @if(Auth::id()==$user->id)
+            @if(Auth::id()==$u->id)
                 <a href="" data-toggle="modal" data-target="#profileModal"><i class="fa fa-pencil">&nbsp;Update profile</i></a><br>
                 <a href="{{ url('/view-messages') }}"><i class="fa fa-envelope">&nbsp; Messages</i></a>
 
@@ -168,14 +168,15 @@
         <div class="col-sm-9">
             <br>
             @foreach($questions as $question)
+                @if($question->user_id==$u->id)
                 <article class="media content-section">
-                    <a class="mr-2" href=""><img class="rounded-circle article-img" src="{{ $question->profpic }}"></a>
+                    <a class="mr-2" href=""><img class="rounded-circle article-img" src="{{ $u->profpic }}"></a>
                     <div class="media-body">
                         <div class="article-metadata">
                             <form method="post" action="{{url('/user-profile')}}">
                                 @csrf
-                                <input type="hidden" name="user_id" value="{{ $question->user_id }}">
-                                <a class="mr-2" href=""><button type="submit" class="buttontext">{{ $question->name }}</button></a>
+                                <input type="hidden" name="user_id" value="{{ $u->id }}">
+                                <a class="mr-2" href=""><button type="submit" class="buttontext">{{ $u->name }}</button></a>
                             </form>
 
                             <small class="text-muted">Created: {{ $question->created_at }}</small>
@@ -196,6 +197,7 @@
                     </div>
 
                 </article>
+                @endif
         @endforeach
 
 

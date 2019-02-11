@@ -22,7 +22,7 @@ class QuestionsController extends Controller
         */
         $questions = DB::table('users')
             ->join('questions', 'users.id', '=', 'questions.user_id')
-            ->select('users.*', 'questions.id', 'questions.title', 'questions.user_id', 'questions.question', 'questions.created_at')->orderBy('questions.created_at', 'desc')
+            ->select('users.id as uid', 'users.profpic as profpic', 'users.name as name', 'questions.id as qid', 'questions.title as title', 'questions.question as question', 'questions.created_at as created_at')->orderBy('questions.created_at', 'desc')
             ->paginate(5);
 
 
@@ -83,7 +83,8 @@ class QuestionsController extends Controller
         $quiz = $request->input('quiz_id');
         $questions = DB::table('questions')
             ->join('users', 'users.id', '=', 'questions.user_id')
-            ->where('questions.id', '=', $quiz)->get();
+            ->where('questions.id', '=', $quiz)
+            ->select('users.id as uid', 'users.profpic as profpic', 'users.name as name', 'questions.id as qid', 'questions.title as title', 'questions.question as question', 'questions.created_at as created_at')->get();
         $comments = DB::select("SELECT * FROM comments WHERE question_id=$quiz");
         return view('questions.show', ['questions'=> $questions], ['comments'=> $comments]);
 
@@ -114,15 +115,21 @@ class QuestionsController extends Controller
     public function update(Request $request, Question $question)
     {
         //
-        /*
+
         $quiz_id = $request->input('quiz_id');
         $title = $request->input('title');
         $question = $request->input('question');
 
+
         DB::update("UPDATE questions set title = ?, question = ? WHERE id = ?",[$title,$question,$quiz_id]);
-        return view('home');
-        */
-        return $request->input('quiz_id');
+
+        $questions = DB::table('questions')
+            ->join('users', 'users.id', '=', 'questions.user_id')
+            ->where('questions.id', '=', $quiz_id)
+            ->select('users.id as uid', 'users.profpic as profpic', 'users.name as name', 'questions.id as qid', 'questions.title as title', 'questions.question as question', 'questions.created_at as created_at')->get();
+        $comments = DB::select("SELECT * FROM comments WHERE question_id=$quiz_id");
+        return view('questions.show', ['questions'=> $questions], ['comments'=> $comments]);
+
 
     }
 
