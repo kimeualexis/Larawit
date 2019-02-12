@@ -12,11 +12,12 @@
             <div class="twPc-div">
             <img class="twPc-bg twPc-block" src="">
 
+
             <div>
 
-                    <a title="Mert S. Kaplan" href="https://twitter.com/mertskaplan" class="twPc-avatarLink">
-                        @if(!empty($u->profpic))
-                            <img alt="Mert S. Kaplan" src="{{ $u->profpic }}" class="twPc-avatarImg">
+                    <a title="Mert S. Kaplan" href="" class="twPc-avatarLink">
+                        @if($u->profpic)
+                            <img src="{{ $u->profpic }}" class="twPc-avatarImg">
                         @else
                             <img alt="Mert S. Kaplan" src="http://127.0.0.1:8000/uploads/default.jpg" class="twPc-avatarImg">
                         @endif
@@ -35,7 +36,7 @@
 
                     <!-- Modal -->
                     <div id="myModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog modal-lg">
+                        <div class="modal-dialog modal-md">
 
                             <!-- Modal content-->
                             <div class="modal-content">
@@ -103,8 +104,12 @@
         <div class="col-sm-3">
             <br>
             <i class="fa fa-user">&nbsp;{{ $u->name }}</i><br>
+            @if($u->status)
             <i class="fa fa-book">&nbsp;{{ $u->status }}</i><br>
+            @endif
+            @if($u->website)
             <a href="{{ $u->website }}"> <i class="fa fa-link">&nbsp;{{ $u->website }}</i></a><br>
+            @endif
 
             @if(Auth::id()==$u->id)
                 <a href="" data-toggle="modal" data-target="#profileModal"><i class="fa fa-pencil">&nbsp;Update profile</i></a><br>
@@ -170,13 +175,17 @@
             @foreach($questions as $question)
                 @if($question->user_id==$u->id)
                 <article class="media content-section">
+                    @if($u->profpic)
                     <a class="mr-2" href=""><img class="rounded-circle article-img" src="{{ $u->profpic }}"></a>
+                    @else()
+                        <a class="mr-2" href=""><img class="rounded-circle article-img" src="http://127.0.0.1:8000/uploads/default.jpg"></a>
+                    @endif
                     <div class="media-body">
                         <div class="article-metadata">
                             <form method="post" action="{{url('/user-profile')}}">
                                 @csrf
                                 <input type="hidden" name="user_id" value="{{ $u->id }}">
-                                <a class="mr-2" href=""><button type="submit" class="buttontext">{{ $u->name }}</button></a>
+                                <a class="mr-2" href=""><button type="submit" class="buttontext" style="font-family: 'Century Schoolbook L'; color: #1d68a7;"><span class="dot"></span>&nbsp;{{ $u->name }}</button></a>
                             </form>
 
                             <small class="text-muted">Created: {{ $question->created_at }}</small>
@@ -185,7 +194,7 @@
                         <form method="post" action="{{url('/view-question')}}">
                             @csrf
                             <input type="hidden" name="quiz_id" value="{{ $question->id }}">
-                            <h2><a class="article-title" href=""><button type="submit" class="buttontext">{{ $question->title }}</button></a></h2>
+                            <h2><a class="article-title" href=""><button type="submit" class="buttontext" style="font-family: 'Century Schoolbook L';">{{ $question->title }}</button></a></h2>
                         </form>
                         <p class="article-content">{{ $question->question }}</p>
 

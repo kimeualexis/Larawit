@@ -1,11 +1,12 @@
 @extends('layouts.app')
+<link rel="shortcut icon" href="{{{ asset('img/favicon.png') }}}">
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header" style="font-family: 'Century Schoolbook L'; color: #1d68a7; font-size: 18px;"><strong>{{ __('Login') }}</strong></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

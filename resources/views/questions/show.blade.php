@@ -4,16 +4,21 @@
 @section('content')
     @foreach($questions as $quiz)
         <article class="media content-section">
+            @if($quiz->profpic)
             <img class="rounded-circle article-img" src="{{ $quiz->profpic }}">
+            @else()
+           <img class="rounded-circle article-img" src="http://127.0.0.1:8000/uploads/default.jpg">
+            @endif
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="">{{ $quiz->name }}</a>
+                    <a class="mr-2" href="{{ route('user-profile', $quiz->uid) }}"><span class="dot"></span>&nbsp;{{ $quiz->name }}</a>
                     <small class="text-muted">{{ $quiz->created_at }}</small>
                     <div class="">
-                        @if(Auth::user()->id==($quiz->uid))
+
+                        @if(Auth::id()==($quiz->uid))
                         <a class="btn btn-secondary btn-sn mt-1 mb-1" href="" data-toggle="modal" data-target="#quizUpdate">Update</a>
                         <a class="btn btn-danger btn-sn mt-1 mb-1" href='delete-question/{{ $quiz->qid }}'>Delete</a>
-
+                        @else()
                             <!-- Modal -->
                             <div id="quizUpdate" class="modal fade" role="dialog">
                                 <div class="modal-dialog modal-lg">

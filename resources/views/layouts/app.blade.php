@@ -19,13 +19,14 @@
     <!-- Styles -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{{ asset('img/favicon.png') }}}">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-family: 'Century Schoolbook L'; color: #1d68a7;">
+                    <strong>{{ config('app.name', 'Laravel') }}</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -42,13 +43,14 @@
                         <!-- Authentication Links -->
                         @guest
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
+                            <li class="nav-item btn btn-outline-success">
+                                <a class="nav-link" href="{{ route('login') }}" style="font-family: 'Century Schoolbook L';"><strong>{{ __('Login') }}</strong></a>
+                            </li>&nbsp;
+
 
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <li class="nav-item btn btn-outline-primary">
+                                    <a class="nav-link" href="{{ route('register') }}" style="font-family: 'Century Schoolbook L'"><strong>{{ __('Register') }}</strong></a>
                                 </li>
                             @endif
                         @else

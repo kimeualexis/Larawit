@@ -140,11 +140,11 @@ class QuestionsController extends Controller
      * @param  \App\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question, $id)
+    public function destroy($id)
     {
 
         $quiz = Question::find($id);
-        $quiz->destroy();
-        //
+        $quiz->delete();
+        return view('/');
     }
 }

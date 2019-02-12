@@ -101,4 +101,16 @@ a.article-title:hover {
     border:none;
     padding:0!important;
     cursor:pointer;
+    font-size: 18px;
+    color: #171a1d;
+    font-style: normal;
+    font-size: large;
+}
+
+.dot {
+    height: 11px;
+    width: 11px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
 }

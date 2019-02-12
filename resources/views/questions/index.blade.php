@@ -8,12 +8,15 @@
     @foreach($questions as $question)
     <article class="media content-section">
             @csrf
+        @if($question->profpic)
         <a class="mr-2" href="{{ route('user-profile', $question->uid) }}"><img class="rounded-circle article-img" src="{{ $question->profpic }}"></a>
-
+        @else()
+            <a class="mr-2" href="{{ route('user-profile', $question->uid) }}"><img class="rounded-circle article-img" src="http://127.0.0.1:8000/uploads/default.jpg"></a>
+        @endif
             <div class="media-body">
             <div class="article-metadata">
 
-                <a class="mr-2" href="{{ route('user-profile', $question->uid) }}"><button type="submit" class="buttontext">{{ $question->name }}</button></a>
+                <a class="mr-2" href="{{ route('user-profile', $question->uid) }}"><button type="submit" class="buttontext" style="font-family: 'Century Schoolbook L'; color: #1d68a7;"><span class="dot"></span>&nbsp;{{ $question->name }}</button></a>
                 <small class="text-muted">Created: {{ $question->created_at }}</small>
             </div>
             <form method="post" action="{{url('/view-question')}}">

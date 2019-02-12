@@ -70,8 +70,14 @@
         <div class="col-sm-2">
             <br>
             <i class="fa fa-user">&nbsp;{{ $user->name }}</i>
-            <i class="fa fa-book">&nbsp;{{ $user->status }}</i>
-            <a href="{{ $user->website }}"> <i class="fa fa-link">&nbsp;{{ $user->website }}</i></a>
+            <br>
+
+            @if($user->status)
+                <i class="fa fa-book">&nbsp;{{ $user->status }}</i><br>
+            @endif
+            @if($user->website)
+                <a href="{{ $user->website }}"> <i class="fa fa-link">&nbsp;{{ $user->website }}</i></a><br>
+            @endif
 
             @if(Auth::id()==$user->id)
                 <a href="" data-toggle="modal" data-target="#profileModal"><i class="fa fa-pencil">&nbsp;Update profile</i></a><br>
