@@ -136,6 +136,11 @@
                                         <input type="file"  name="prof_pic" value="{{ Auth::user()->profpic }}" required />
                                     </div>
 
+                                    <div class="form-group" style="padding: 8px;">
+                                        <label class="control-label">Banner</label>
+                                        <input type="file"  name="banner" value="{{ Auth::user()->banner }}" />
+                                    </div>
+
 
                                     <div class="form-group" style="padding: 8px;">
                                         <label class="control-label">Username</label>
@@ -200,8 +205,8 @@
 
 
                         <div class="quiz-icons">
-                            <i class="fa fa-envelope-o"></i>
-                            <i class="fa fa-thumbs-up"></i>
+                            <img src="/images/comment.png">&nbsp;&nbsp;&nbsp;&nbsp;
+                            <img src="/images/like.png">
                         </div>
                     </div>
 

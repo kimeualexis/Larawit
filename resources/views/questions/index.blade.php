@@ -27,8 +27,8 @@
             <p class="article-content">{{ $question->question }}</p>
 
             <div class="quiz-icons">
-                <i class="fa fa-envelope-o"></i>
-                <i class="fa fa-thumbs-up"></i>
+                <img src="/images/comment.png">&nbsp;&nbsp;&nbsp;&nbsp;
+                <img src="/images/like.png">
             </div>
 
         </div>

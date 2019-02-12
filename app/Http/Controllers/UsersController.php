@@ -96,6 +96,7 @@ class UsersController extends Controller
 
         $this->validate($request,[
             'prof_pic'=>'required |image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'banner'=>'required |image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'username'=>'required',
             'status'=>'required',
 
@@ -107,18 +108,23 @@ class UsersController extends Controller
         $website=$request->input('website');
 
         $prof_pic="/uploads"."/".$request->input('prof-pic');
+        $banner="/uploads"."/".$request->input('banner');
 
         //uploading image to public/uploads  folder
-        if(Input::hasFile('prof_pic')){
+        if(Input::hasFile('prof_pic') OR (Input::hasFile('banner'))){
             $file= Input::file('prof_pic');
             $file->move(public_path().'/uploads', $file->getClientOriginalName());
             $url=URL::to("/") . '/uploads'.'/'. $file->getClientOriginalName();
+
+            $banner= Input::file('prof_pic');
+            $banner->move(public_path().'/uploads', $banner->getClientOriginalName());
+            $burl=URL::to("/") . '/uploads'.'/'. $banner->getClientOriginalName();
 
 
             //getting user id
             $user_id=Auth::user()->id;
             //upating user table
-            DB::update("UPDATE users SET name = ?, status = ? , profpic = ?, website = ? WHERE id = ?",[$username,$status,$url,$website,$user_id]);
+            DB::update("UPDATE users SET name = ?, status = ? , profpic = ?, banner = ?, website = ? WHERE id = ?",[$username,$status,$url, $burl, $website,$user_id]);
 
         }
 

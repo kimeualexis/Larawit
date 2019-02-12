@@ -26,6 +26,7 @@ Route::get('user-profile/{id}', 'UsersController@show')->name('user-profile');
 Route::get('read-message/{id}', 'MessagesController@read')->name('read-message');
 Route::post('/update-question', 'QuestionsController@update')->name('update-question');
 Route::post('delete-question/{id}', 'QuestionsController@destroy')->name('delete-question');
+Route::get('/admin', 'AdminsController@index')->name('admin');
 /*
 
 Route::resource('questions', QuestionsController);
